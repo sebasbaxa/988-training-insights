@@ -1,0 +1,16 @@
+# Environment
+.venv/
+__pycache__/
+*.pyc
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Originals kept locally (the app uses data/survey.xlsx)
+BuildFest (7).pdf
+BuildFest_EveryMind_Survey_Data_FULL.xlsx
+
+# Deliverables drafts with team info
+Team*_*
