@@ -93,9 +93,15 @@ def build_theme_sample(n: int = 100, seed: int = 42) -> None:
 
 
 def score_themes() -> None:
-    s = pd.read_csv(SAMPLE)
+    # Teammates each fill their own copy (theme_sample_<name>.csv) to avoid merge
+    # conflicts; a comment coded in several files counts once (first file wins).
+    files = sorted(SAMPLE.parent.glob("theme_sample*.csv"))
+    s = pd.concat([pd.read_csv(f).assign(source=f.name) for f in files], ignore_index=True)
     col = "human_agrees (y/n/partial)"
     done = s[s[col].notna() & (s[col].astype(str).str.strip() != "")]
+    done = done.drop_duplicates(["response_id", "question"])
+    print(f"Files read: {', '.join(f.name for f in files)}")
+    s = s.drop_duplicates(["response_id", "question"])
     if done.empty:
         print("No rows have been hand-coded yet.")
         return

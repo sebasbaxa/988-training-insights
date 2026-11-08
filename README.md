@@ -46,6 +46,16 @@ Columns are matched by keywords in the question text, not by exact headers or po
 - **Audience mix:** students make up about 83% of responses and rate the training differently from adults. Use the "Students only" toggle on the Group gaps tab to compare counties fairly.
 - **Privacy:** comments have emails and phone numbers removed before display or export. The exports contain no names.
 
+## For teammates
+
+**Hand-check the comment themes (about 10 minutes):**
+1. Copy `validation/theme_sample.csv` to `validation/theme_sample_<yourname>.csv`. Each person uses their own file, which avoids merge conflicts.
+2. Pick your rows: person 1 takes rows 1–25, person 2 rows 26–50, person 3 rows 51–75, person 4 rows 76–100.
+3. For each row, read the `comment` and the `assigned_themes`. In `human_agrees (y/n/partial)`, write `y` if the themes fit, `n` if they're wrong, or `p` if they're partly right. If it's not `y`, write the theme you think fits in `human_theme_if_different`.
+4. Commit and push your file. `python validate.py --score-themes` combines everyone's files.
+
+**Test the app and report bugs:** run it (see above) and click through every tab with different filters. Report anything wrong, such as a crash, a number that looks off, an overlapping chart or confusing wording, as a GitHub issue. Include the tab, the filters you used, and a screenshot.
+
 ## Validate
 
 ```bash
